@@ -1,1 +1,13 @@
-<p>This is my index.html</p>
+
+<div>
+<!--za logicke operatere kao for ili if, ide funkcija i end na kraju-->
+    {% for name, product in products.items %} <!--ispisivanje svih producta-->
+
+        <div>     <!--ispisivanje elemenata svakog product-->
+            <p>{{name}}</p>
+            <small>{{product.description}}</small>
+            <p>${{product.price}}</p>
+        </div>
+    {% endfor %}
+
+</div>

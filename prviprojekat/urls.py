@@ -18,8 +18,15 @@ from django.contrib import admin
 from django.urls import path
 from core.views import home
 from core.views import about
+from core.views import product
+from core.views import user
+
+#127.0.0.1:8000 ==> my page
+#pokretanje servera: python3 manage.py runserver
 
 urlpatterns = [
     path('', home),  #prazna stranica
-    path('about', about)
+    path('about', about),
+    path('proizvod/<str:name>', product),   #str: mora biti string
+    path('korisnik/<int:num>', user)        #int: mora biti ceo broj
 ]
