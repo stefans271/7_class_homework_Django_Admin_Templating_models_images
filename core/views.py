@@ -1,4 +1,5 @@
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import (HttpResponse, HttpResponseNotFound,
+                         HttpResponseNotAllowed)
 # protokol za komunikaciju na internetu
 from django.shortcuts import render  #prikazivanje web strane
 
@@ -42,8 +43,6 @@ def about(request):
 
 def product(request,name):
 
-
-
     product = products.get(name)
     if not product:
         return HttpResponseNotFound("Product not found!") #strana ne postoji
@@ -64,3 +63,21 @@ def product(request,name):
 def user(request,num):
     return HttpResponse(f"This is user {num}") #resavamo br. usera promenljivom "num"
 
+def create_product(request):  #metodom ucitavamo novi product_create.html
+    return render(request,"product_create.html")
+
+def save_product(request): #metod za cuvanje proizvoda
+    if request.method != "POST":
+        return HttpResponseNotAllowed("Only POST method is allowed")
+
+    #request=> iz trenutnog zahteva
+    #POST=>request.post--iz trenutnog zahteva iz POST metode
+    #.get =>uzmi podatak sa nazivom "title"
+    title=request.POST.get("title")
+    price=request.POST.get("price")
+    description=request.POST.get("description")
+    #provera da li su svi podaci prosledjeni-bez praznih polja:
+    if not title or not price or not description:
+        return HttpResponse("All fields are required",status=400)  #los zahtev
+    #status 201 => uspesno napravljen podatak
+    return HttpResponse(f"this is a {title},{price},{description}",status=201)
