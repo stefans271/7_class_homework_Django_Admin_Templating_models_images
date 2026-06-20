@@ -1,12 +1,19 @@
 
 from django.contrib import admin
 from django.urls import path
-from core.views import home
-from core.views import about
-from core.views import product
-from core.views import user
-from core.views import create_product
-from core.views import save_product
+#general.py
+from core.views.general import home
+from core.views.general import about
+#user.py
+from core.views.user import user
+#product.py
+from core.views.product import product
+from core.views.product import create_product
+from core.views.product import save_product
+
+#auth_views
+from django.contrib.auth import views as auth_views
+
 
 #127.0.0.1:8000 ==> my page
 #pokretanje servera: python3 manage.py runserver
@@ -19,5 +26,10 @@ urlpatterns = [
     #GET metoda za pristup HTML kodu (direktan prustup svima)
     path('admin/proizvod/create', create_product),  #nova adresa
     #POST metoda za cuvanje proizvoda u bazi(pristup ogranicen-bez korisnika)
-    path("admin/proizvod/save", save_product)
+    path("admin/proizvod/save", save_product),
+    #login strana
+    path('login/', auth_views.LoginView.as_view(template_name='auth/login.html',
+                                                next_page="/")),#/-->ide na glavnu stranicu
+    path('logout/', auth_views.LogoutView.as_view(next_page="/login"))
+    #sa logout-a vraca na login stranicu => "/login"
 ]

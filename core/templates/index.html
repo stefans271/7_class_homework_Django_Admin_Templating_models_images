@@ -1,12 +1,16 @@
 <div>
-<!--za logicke operatere kao for ili if, ide funkcija i end na kraju-->
-    {% for name, product in products.items %} <!--ispisivanje svih producta-->
 
+    <form method="post" action="/logout/">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+    <!--za logicke operatere kao for ili if, ide funkcija i end na kraju-->
+    {% for product in products %} <!--ispisivanje svih producta-->
         <div>     <!--ispisivanje elemenata svakog product-->
-            <p>{{name}}</p>
+            <p>{{product.title}}</p>
             <small>{{product.description}}</small>
             <p>${{product.price}}</p>
         </div>
     {% endfor %}
-
 </div>
