@@ -8,8 +8,8 @@ from core.views.general import about
 from core.views.user import user
 #product.py
 from core.views.product import product
-from core.views.product import create_product
-from core.views.product import save_product
+#from core.views.product import create_product
+#from core.views.product import save_product
 
 #auth_views
 from django.contrib.auth import views as auth_views
@@ -24,12 +24,16 @@ urlpatterns = [
     path('proizvod/<str:name>', product),   #str: mora biti string
     path('korisnik/<int:num>', user),        #int: mora biti ceo broj
     #GET metoda za pristup HTML kodu (direktan prustup svima)
-    path('admin/proizvod/create', create_product),  #nova adresa
+    #path('admin/proizvod/create', create_product),  #nova adresa
     #POST metoda za cuvanje proizvoda u bazi(pristup ogranicen-bez korisnika)
-    path("admin/proizvod/save", save_product),
+    #path("admin/proizvod/save", save_product),
     #login strana
     path('login/', auth_views.LoginView.as_view(template_name='auth/login.html',
-                                                next_page="/")),#/-->ide na glavnu stranicu
-    path('logout/', auth_views.LogoutView.as_view(next_page="/login"))
-    #sa logout-a vraca na login stranicu => "/login"
+                                                next_page="/"), name="login_page"),
+                                                #/-->ide na glavnu stranicu
+    path('logout/', auth_views.LogoutView.as_view(next_page="/"),
+                                                    name="logout_action"),
+                                                #sa logout-a vraca na glavnu stranicu
+    path('admin/', admin.site.urls),
 ]
+

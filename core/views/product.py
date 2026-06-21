@@ -1,8 +1,10 @@
+from django.contrib.auth.decorators import login_required
 from django.http import (HttpResponse, HttpResponseNotFound,
                          HttpResponseNotAllowed)
 # protokol za komunikaciju na internetu
 from django.shortcuts import render  #prikazivanje web strane
 from ..models import Product  #ucitavamo klasu Product iz fajla models(u drugom folderu)
+from django.contrib.auth.decorators import login_required
 
 
 def product(request,name):
@@ -20,14 +22,17 @@ def product(request,name):
     return render(request, "product.html", {"product_info": product})
     #pravimo context kako bismo prosledili product
 
+#@login_required #(login_url='/login/')
+#uslov za dolazak na product/create jeste da je korisnik prethodno ulogovan
+#ako nismo ulogovani , vraca nas na login stranicu
+#def create_product(request):  #metodom ucitavamo novi product_create.html
+    #return render(request,"product_create.html")
 
-def create_product(request):  #metodom ucitavamo novi product_create.html
-    return render(request,"product_create.html")
 
-
-def save_product(request): #metod za cuvanje proizvoda
-    if request.method != "POST":
-        return HttpResponseNotAllowed("Only POST method is allowed")
+#@login_required
+#def save_product(request): #metod za cuvanje proizvoda
+    #if request.method != "POST":
+        #return HttpResponseNotAllowed("Only POST method is allowed")
 
     #request=> iz trenutnog zahteva
     #POST=>request.post--iz trenutnog zahteva iz POST metode

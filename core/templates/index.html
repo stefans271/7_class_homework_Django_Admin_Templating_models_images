@@ -1,9 +1,15 @@
 <div>
-
-    <form method="post" action="/logout/">
-        {% csrf_token %}
-        <button type="submit">Logout</button>
-    </form>
+    <!--ovu proveru koristimo da bi se uverili da li je korisnik ulogovan-->
+    {% if user.is_authenticated %}
+        <p>Hello {{user.username}}</p>  <!--ispisivanje usera iz baze-->
+        <form method="post" action="{% url 'logout_action' %}">
+            {% csrf_token %}        <!--dugme vodi na logout stranicu-->
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+    <!--ako korisnik nije ulogovan, prikazi link do login stranice-->
+        <a href="{% url 'login_page' %}">Login</a>
+    {% endif %}
 
     <!--za logicke operatere kao for ili if, ide funkcija i end na kraju-->
     {% for product in products %} <!--ispisivanje svih producta-->

@@ -17,6 +17,8 @@ def main():
         ) from exc
     execute_from_command_line(sys.argv)
 
-
 if __name__ == '__main__':
     main()
+
+#pokretanje html: python3 manage.py runserver
+#server at http://127.0.0.1:8000/
