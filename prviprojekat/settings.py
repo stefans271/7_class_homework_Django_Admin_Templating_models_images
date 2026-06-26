@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-xk7ul9(@y!-y-x=5y)g@c(tj3+*ebru20%u=ccf2b-z7wj&4iw
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#http://127.0.0.1:8000/media
+MEDIA_URL = '/media/'
 
+MEDIA_ROOT = BASE_DIR / 'media'  #putanja do tog direktorijuma
 
 # Application definition
 

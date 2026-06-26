@@ -1,3 +1,5 @@
 <h1>{{product_info.title}}</h1>
 <p>{{product_info.description}}</p>
-<p>{{product_info.price}}</p>
+<p>{{product_info.discounted_price|default:product_info.price}}</p>
+<!--ispisivanje prvo cene sa popustom, i ukoliko je nema, onda pise normalna cena
+        proizvoda na stranici proizvoda-->

@@ -16,7 +16,14 @@
         <div>     <!--ispisivanje elemenata svakog product-->
             <p>{{product.title}}</p>
             <small>{{product.description}}</small>
-            <p>${{product.price}}</p>
+        <!--ispisivanje prvo cene sa popustom, i ukoliko je nema, onda normalna cena
+        proizvoda na glavnoj stranici-->
+            <p>${{product.discounted_price|default:product.price}}</p>
+            <!--ucitavamo sliku na glavnoj stranici-->
+            <img src="{{ product.image.url }}" width="50px" />
+            <a href="{% url "product_page" name=product.title %}">Pogledaj proizvod</a>
+        <!--pravimo link na glavnoj stranici koje nas vodi do proizvoda-->
+
         </div>
     {% endfor %}
 </div>
