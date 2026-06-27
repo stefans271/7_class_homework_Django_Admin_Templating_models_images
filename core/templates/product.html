@@ -1,5 +1,19 @@
-<h1>{{product_info.title}}</h1>
-<p>{{product_info.description}}</p>
-<p>{{product_info.discounted_price|default:product_info.price}}</p>
+{% extends "layout.html" %}     <!--ucitaj ovaj product.html u layout.html-->
+
+{% block title %}
+    {{product_info.title}}
+{% endblock %}
+
+{% block content %}
+    <h1>{{product_info.title}}</h1>
+    <p>{{product_info.description}}</p>
+    <p>{{product_info.discounted_price|default:product_info.price}}</p>
 <!--ispisivanje prvo cene sa popustom, i ukoliko je nema, onda pise normalna cena
         proizvoda na stranici proizvoda-->
+    {% for img in product_info.images.all %}
+        <img width="150px" src="{{ img.image.url }}"/>
+    {% endfor %}
+    <!--prikaz svih Product Images na stranici datog proizvoda (izlistavanje)-->
+{% endblock %}
+
+

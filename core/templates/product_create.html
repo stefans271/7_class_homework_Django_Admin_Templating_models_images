@@ -1,11 +1,19 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create a product
+{% endblock %}
+
+{% block content %}
 <!--html forma sa novom adresom za pristup POST metodom-->
-<form method="post" action="/admin/proizvod/save">
+    <form method="post" action="/admin/proizvod/save">
 
-    {% csrf_token %} <!--potreban je za pristup stranici POST metodom -->
+        {% csrf_token %} <!--potreban je za pristup stranici POST metodom -->
 
-    <input name="title" type="text" placeholder="Unesite ime proizvoda">
-    <input name="price" type="text" placeholder="Unesite cenu proizvoda">
-    <textarea name="description" placeholder="Unesite opis proizvoda"></textarea>
-    <button>Napravi proizvod</button>
-</form>
+        <input name="title" type="text" placeholder="Unesite ime proizvoda">
+        <input name="price" type="text" placeholder="Unesite cenu proizvoda">
+        <textarea name="description" placeholder="Unesite opis proizvoda"></textarea>
+        <button>Napravi proizvod</button>
+    </form>
+{% endblock %}
 

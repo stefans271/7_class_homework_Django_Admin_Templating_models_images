@@ -1,7 +1,6 @@
 from email.mime import image
-
 from django.contrib import admin
-from .models import Product, Categories
+from .models import Product, Categories, ProductImage
 from django.utils.html import format_html
 
 #pravimo dekorator klasu za administratorski model(http://127.0.0.1:8000/admin/auth/user/)
@@ -21,4 +20,4 @@ class ProductAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Product, ProductAdmin)  #iz ProductAdmin uzimamo podatke za prikaz
 admin.site.register(Categories)
-
+admin.site.register(ProductImage)

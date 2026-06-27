@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %} {% endblock %}</title>
+    </head>
+
+    <body>
+    <!--ucitaj navigaciju i footer-->
+        {% include "partials/navigation.html" %}
+
+        {% block content %} {% endblock %}   <!--prikazi blok content-->
+
+        {% include "partials/footer.html" %}
+
+    </body>
+</html>

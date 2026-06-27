@@ -1,29 +1,40 @@
-<div>
-    <!--ovu proveru koristimo da bi se uverili da li je korisnik ulogovan-->
-    {% if user.is_authenticated %}
-        <p>Hello {{user.username}}</p>  <!--ispisivanje usera iz baze-->
-        <form method="post" action="{% url 'logout_action' %}">
-            {% csrf_token %}        <!--dugme vodi na logout stranicu-->
-            <button type="submit">Logout</button>
-        </form>
-    {% else %}
-    <!--ako korisnik nije ulogovan, prikazi link do login stranice-->
-        <a href="{% url 'login_page' %}">Login</a>
-    {% endif %}
+{% extends "layout.html" %}
+<!--ucitaj ovaj index.html u pomenuti layout.html-->
 
-    <!--za logicke operatere kao for ili if, ide funkcija i end na kraju-->
-    {% for product in products %} <!--ispisivanje svih producta-->
-        <div>     <!--ispisivanje elemenata svakog product-->
-            <p>{{product.title}}</p>
-            <small>{{product.description}}</small>
-        <!--ispisivanje prvo cene sa popustom, i ukoliko je nema, onda normalna cena
-        proizvoda na glavnoj stranici-->
-            <p>${{product.discounted_price|default:product.price}}</p>
-            <!--ucitavamo sliku na glavnoj stranici-->
-            <img src="{{ product.image.url }}" width="50px" />
-            <a href="{% url "product_page" name=product.title %}">Pogledaj proizvod</a>
-        <!--pravimo link na glavnoj stranici koje nas vodi do proizvoda-->
+<!--dajemo naziv glavnoj stranici-->
+{% block title %}
+    Glavna stranica
+{% endblock %}
 
-        </div>
-    {% endfor %}
-</div>
+{% block content %}
+
+    <div>
+        <!--ovu proveru koristimo da bi se uverili da li je korisnik ulogovan-->
+        {% if user.is_authenticated %}
+            <p>Hello {{user.username}}</p>  <!--ispisivanje usera iz baze-->
+            <form method="post" action="{% url 'logout_action' %}">
+                {% csrf_token %}        <!--dugme vodi na logout stranicu-->
+                <button type="submit">Logout</button>
+            </form>
+        {% else %}
+        <!--ako korisnik nije ulogovan, prikazi link do login stranice-->
+            <a href="{% url 'login_page' %}">Login</a>
+        {% endif %}
+
+        <!--za logicke operatere kao for ili if, ide funkcija i end na kraju-->
+        {% for product in products %} <!--ispisivanje svih producta-->
+            <div>     <!--ispisivanje elemenata svakog product-->
+                <p>{{product.title}}</p>
+                <small>{{product.description}}</small>
+            <!--ispisivanje prvo cene sa popustom, i ukoliko je nema, onda normalna cena
+            proizvoda na glavnoj stranici-->
+                <p>${{product.discounted_price|default:product.price}}</p>
+                <!--ucitavamo sliku na glavnoj stranici-->
+                <img src="{{ product.image.url }}" width="50px" />
+                <a href="{% url "product_page" name=product.title %}">Pogledaj proizvod</a>
+            <!--pravimo link na glavnoj stranici koje nas vodi do proizvoda-->
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
